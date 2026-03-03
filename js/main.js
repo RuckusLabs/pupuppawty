@@ -39,7 +39,7 @@ form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const data = new FormData(form);
     const body = [...data.entries()].map(([k, v]) => `${k}: ${v}`).join('\n');
-    window.location.href = `mailto:outthereand@gmail.com?subject=Paw-ty Inquiry&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:hello@pupuppawty.com?subject=Paw-ty Inquiry&body=${encodeURIComponent(body)}`;
     return;
   }
 
@@ -65,6 +65,6 @@ form?.addEventListener('submit', async (e) => {
   } catch {
     btn.disabled = false;
     btn.textContent = 'Send';
-    alert('Something went wrong. Please email us directly at outthereand@gmail.com');
+    alert('Something went wrong. Please email us directly at hello@pupuppawty.com');
   }
 });
