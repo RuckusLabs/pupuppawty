@@ -49,7 +49,7 @@ form?.addEventListener('submit', async (e) => {
   const action = form.getAttribute('action');
 
   // If no real Formspree endpoint is set yet, fall back to mailto
-  if (!action || action.includes('YOUR_FORM_ID')) {
+  if (!action || action.includes('xlgwqewb')) {
     e.preventDefault();
     const data = new FormData(form);
     const body = [...data.entries()].map(([k, v]) => `${k}: ${v}`).join('\n');
