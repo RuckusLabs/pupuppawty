@@ -497,3 +497,9 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
   position: static;
 }
 
+/* Overrides */
+.TextShape-node svg {
+  @media (max-width: 767px) {
+   display: none !important;
+  }
+}
