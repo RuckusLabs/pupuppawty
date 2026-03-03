@@ -3,28 +3,42 @@
    ====================================================== */
 
 // --- Sticky header shadow on scroll ---
-const header = document.querySelector('.site-header');
+const header = document.querySelector('#header');
 window.addEventListener('scroll', () => {
   header?.classList.toggle('scrolled', window.scrollY > 10);
 }, { passive: true });
 
 // --- Mobile nav toggle ---
-const toggle = document.querySelector('.nav__toggle');
-const navLinks = document.querySelector('.nav__links');
+const burgers = document.querySelectorAll('.header-burger-btn');
+const menu = document.querySelector('.header-menu');
 
-toggle?.addEventListener('click', () => {
-  const isOpen = toggle.classList.toggle('is-open');
-  navLinks.classList.toggle('is-open', isOpen);
-  toggle.setAttribute('aria-expanded', String(isOpen));
+function openMenu() {
+  document.body.classList.add('header--menu-open');
+  burgers.forEach(btn => {
+    btn.setAttribute('aria-expanded', 'true');
+    btn.querySelector('.js-header-burger-open-title')?.setAttribute('hidden', '');
+    btn.querySelector('.js-header-burger-close-title')?.removeAttribute('hidden');
+  });
+}
+
+function closeMenu() {
+  document.body.classList.remove('header--menu-open');
+  burgers.forEach(btn => {
+    btn.setAttribute('aria-expanded', 'false');
+    btn.querySelector('.js-header-burger-open-title')?.removeAttribute('hidden');
+    btn.querySelector('.js-header-burger-close-title')?.setAttribute('hidden', '');
+  });
+}
+
+burgers.forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.body.classList.contains('header--menu-open') ? closeMenu() : openMenu();
+  });
 });
 
-// Close mobile nav when a link is clicked
-navLinks?.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    toggle.classList.remove('is-open');
-    navLinks.classList.remove('is-open');
-    toggle.setAttribute('aria-expanded', 'false');
-  });
+// Close when a nav link inside the overlay is clicked
+menu?.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', closeMenu);
 });
 
 // --- Contact form ---
