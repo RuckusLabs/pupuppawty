@@ -12,28 +12,28 @@ window.addEventListener('scroll', () => {
 const burgers = document.querySelectorAll('.header-burger-btn');
 const menu = document.querySelector('.header-menu');
 
-function openMenu() {
-  document.body.classList.add('header--menu-open');
-  burgers.forEach(btn => {
-    btn.setAttribute('aria-expanded', 'true');
-    btn.querySelector('.js-header-burger-open-title')?.setAttribute('hidden', '');
-    btn.querySelector('.js-header-burger-close-title')?.removeAttribute('hidden');
-  });
-}
-
-function closeMenu() {
-  document.body.classList.remove('header--menu-open');
-  burgers.forEach(btn => {
-    btn.setAttribute('aria-expanded', 'false');
-    btn.querySelector('.js-header-burger-open-title')?.removeAttribute('hidden');
-    btn.querySelector('.js-header-burger-close-title')?.setAttribute('hidden', '');
-  });
+function toggleMenu() {
+  const isOpen = document.body.classList.contains('header--menu-open');
+  
+  if (isOpen) {
+    document.body.classList.remove('header--menu-open');
+    burgers.forEach(btn => {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.querySelector('.js-header-burger-open-title')?.removeAttribute('hidden');
+      btn.querySelector('.js-header-burger-close-title')?.setAttribute('hidden', '');
+    });
+  } else {
+    document.body.classList.add('header--menu-open');
+    burgers.forEach(btn => {
+      btn.setAttribute('aria-expanded', 'true');
+      btn.querySelector('.js-header-burger-open-title')?.setAttribute('hidden', '');
+      btn.querySelector('.js-header-burger-close-title')?.removeAttribute('hidden');
+    });
+  }
 }
 
 burgers.forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.body.classList.contains('header--menu-open') ? closeMenu() : openMenu();
-  });
+  btn.addEventListener('click', toggleMenu);
 });
 
 // Close when a nav link inside the overlay is clicked
